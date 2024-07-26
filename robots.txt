@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://fangjiachen20121229.github.io/sitemap.xml
