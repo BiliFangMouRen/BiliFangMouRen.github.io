@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="zh-CH"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="python, 学生管理系统, 学生管理系统教程, python学生管理系统">
+    
+    
+    <meta name="description" content="description for this article">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <script src="/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/static/css/search/style.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>python超详细实现完整学生成绩管理系统 - my personal blog</title>
+    
+    <script type="text/javascript">js_vars = {}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": "2024-07-30", "update": [], "ts": 1722268800, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/">
+                
+                
+                    <h2>JiaChenFang's personal blog</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class="active"><a  href="/blog/">blog</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+</ul>
+
+                <ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">Search</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">Keywords separated by space</span>
+                                <span id="search_loading_hint">Loading, wait please ...</span>
+                                <span id="search_download_err_hint">Download error, please check network and refresh again</span>
+                                <span id="search_other_docs_result_hint">Result from other docs</span>
+                                <span id="search_curr_doc_result_hint">Result from current doc</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/blog/index.html"><span class="label">pygame快速开始</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/blog/teedoc.html"><span class="label">teedoc快速开始</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/blog/python_student.html"><span class="label">python超详细实现完整学生成绩管理系统</span><span class=""></span></a></li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>python超详细实现完整学生成绩管理系统</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="Last modify date: 2024-07-30">
+                                    2024-07-30
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0">系统概述</h2>
+<p>本系统是一个基于Python的学生成绩管理系统，能够方便地记录学生的基本信息，并可以录入和查询学生的各科成绩情况。该系统主要包括三个模块，分别是学生信息管理模块、成绩录入模块和成绩查询模块。具体实现依赖于Python基础知识和面向对象编程的概念。</p>
+<h2 id="%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E4%BB%8B%E7%BB%8D">功能模块介绍</h2>
+<h3 id="%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97">学生信息管理模块</h3>
+<ol>
+<li>学生基本信息录入；</li>
+<li>学生基本信息查询；</li>
+<li>学生基本信息修改；</li>
+<li>学生基本信息删除。</li>
+</ol>
+<h3 id="%E6%88%90%E7%BB%A9%E5%BD%95%E5%85%A5%E6%A8%A1%E5%9D%97">成绩录入模块</h3>
+<ol>
+<li>成绩录入功能；</li>
+<li>成绩修改功能。</li>
+</ol>
+<h3 id="%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2%E6%A8%A1%E5%9D%97">成绩查询模块</h3>
+<ol>
+<li>学生单科成绩查询；</li>
+<li>学生总分查询。</li>
+</ol>
+<h2 id="%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B">实现过程</h2>
+<hr />
+<h3 id="1.-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B1%BB">1. 创建数据存储类</h3>
+<ol>
+<li>定义<code>Student</code>类来存储学生信息；</li>
+<li>定义<code>Score</code>类来存储学生成绩。</li>
+</ol>
+
+<pre class="language-python"><code class="language-python">class Student:
+    def __init__(self, id, name, age, gender):
+        self.id = id
+        self.name = name
+        self.age = age
+        self.gender = gender
+
+class Score:
+    def __init__(self, id, chinese, math, english):
+        self.id = id
+        self.chinese = chinese
+        self.math = math
+        self.english = english
+</code></pre>
+<h3 id="2.-%E5%AE%9E%E7%8E%B0%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97">2. 实现学生信息管理模块</h3>
+<ol>
+<li>实现学生信息录入功能；</li>
+<li>实现学生信息查询/修改/删除功能。</li>
+</ol>
+
+<pre class="language-python"><code class="language-python">class StudentManager:
+    def __init__(self):
+        self.students = []
+
+    def add_student(self, student):
+        self.students.append(student)
+
+    def remove_student(self, id):
+        for s in self.students:
+            if s.id == id:
+                self.students.remove(s)
+                return
+
+    def get_student(self, id):
+        for s in self.students:
+            if s.id == id:
+                return s
+
+    def update_student(self, student):
+        for i, s in enumerate(self.students):
+            if s.id == student.id:
+                self.students[i] = student
+                return
+</code></pre>
+<h3 id="3.-%E5%AE%9E%E7%8E%B0%E6%88%90%E7%BB%A9%E5%BD%95%E5%85%A5%E6%A8%A1%E5%9D%97">3. 实现成绩录入模块</h3>
+<ol>
+<li>实现成绩录入功能；</li>
+<li>实现成绩修改功能。</li>
+</ol>
+
+<pre class="language-python"><code class="language-python">class ScoreManager:
+    def __init__(self):
+        self.scores = []
+
+    def add_score(self, score):
+        self.scores.append(score)
+
+    def update_score(self, score):
+        for i, s in enumerate(self.scores):
+            if s.id == score.id:
+                self.scores[i] = score
+                return
+</code></pre>
+<h3 id="4.-%E5%AE%9E%E7%8E%B0%E6%88%90%E7%BB%A9%E6%9F%A5%E8%AF%A2%E6%A8%A1%E5%9D%97">4. 实现成绩查询模块</h3>
+<ol>
+<li>实现学生单科成绩查询；</li>
+<li>实现学生总分查询。</li>
+</ol>
+
+<pre class="language-python"><code class="language-python">class ScoreQuery:
+    def __init__(self):
+        self.scores = None
+
+    def set_scores(self, scores):
+        self.scores = scores
+
+    def get_score(self, id, subject):
+        for s in self.scores:
+            if s.id == id:
+                if subject == 'chinese':
+                    return s.chinese
+                elif subject == 'math':
+                    return s.math
+                elif subject == 'english':
+                    return s.english
+        return None
+
+    def get_total_score(self, id):
+        score = 0
+        for s in self.scores:
+            if s.id == id:
+                score += s.chinese + s.math + s.english
+        return score
+</code></pre>
+<h3 id="5.-%E4%B8%BB%E7%A8%8B%E5%BA%8F%E8%B0%83%E7%94%A8">5. 主程序调用</h3>
+<ol>
+<li>实例化各个类对象；</li>
+<li>调用各个功能模块。</li>
+</ol>
+
+<pre class="language-python"><code class="language-python">if __name__ == '__main__':
+    sm = StudentManager()
+    scorem = ScoreManager()
+    scoreq = ScoreQuery()
+
+    # 添加学生信息
+    sm.add_student(Student(1, 'Tony', 20, '男'))
+    sm.add_student(Student(2, 'Alice', 19, '女'))
+
+    # 更新学生信息
+    s = sm.get_student(1)
+    s.name = 'Tom'
+    sm.update_student(s)
+
+    # 删除学生信息
+    sm.remove_student(2)
+
+    # 添加学生成绩
+    scorem.add_score(Score(1, 90, 80, 70))
+    scorem.add_score(Score(2, 60, 70, 80))
+
+    # 查询学生成绩
+    scoreq.set_scores(scorem.scores)
+    print(scoreq.get_score(1, 'chinese'))
+    print(scoreq.get_total_score(1))
+</code></pre>
+<h2 id="%E7%A4%BA%E4%BE%8B%E8%AF%B4%E6%98%8E">示例说明</h2>
+<h3 id="%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E6%B7%BB%E5%8A%A0%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF">示例1：添加学生信息</h3>
+
+<pre class="language-python"><code class="language-python">sm.add_student(Student(1, 'Tony', 20, '男'))
+sm.add_student(Student(2, 'Alice', 19, '女'))
+</code></pre>
+<p>在示例中，创建了<code>StudentManager</code>类对象<code>sm</code>，并分别添加了两个学生信息，分别是id为1的学生Tony和id为2的学生Alice。</p>
+<h3 id="%E7%A4%BA%E4%BE%8B2%EF%BC%9A%E6%9B%B4%E6%96%B0%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF">示例2：更新学生信息</h3>
+
+<pre class="language-python"><code class="language-python">s = sm.get_student(1)
+s.name = 'Tom'
+sm.update_student(s)
+</code></pre>
+<p>在示例中，根据id为1的学生信息，更新了该学生的姓名为Tom。</p>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/blog/teedoc.html">
+                            <span class="icon"></span>
+                            <span class="label">teedoc快速开始</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a></a><ul><li><a target="_blank" href="/#"></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">Generated by teedoc adapted by JiaChenFang</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script src="/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/static/js/theme_default/main.js"></script>
+    
+        <script src="/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/static/js/search/search_main.js"></script>
+    
+        <script src="/static/js/custom.js"></script>
+    
+        <script type="text/javascript" src="/static/js/live.js"></script>
+    
+</body>
+
+</html>
