@@ -1,7 +1,0 @@
-items:
--   label: pygame快速开始
-    file: README.md
--   label: teedoc快速开始
-    file: teedoc.md
--   label: python超详细实现完整学生成绩管理系统
-    file: python_student.md
